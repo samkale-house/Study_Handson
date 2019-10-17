@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>This will be a university home page</a>.</p>
+<div ng-app="myApp" ng-controller="coursesCtrl">
+    Let's try some angular
+    4+6={{4+6}}
+    <table style="border:2">
+        <thead>
+        <tr>
+            <th ng-click="sortBy(Course_name)">Course Name</th>
+            <th ng-click="sortBy(Course_fee)">Course Fees</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="x in courses| orderBy:sortField:reverseOrder">
+        <td>{{x.Course_name}}</td>
+        <td>{{x.Course_fee}}</td>
+        </tr></tbody>
+
+        
+    </table>
+    
+    
+    </div>
+</div>
+<script>
+    var app=angular.module('myApp',[]);
+    app.controller('coursesCtrl',function($scope,$http){
+        $scope.courses=[
+        {'Course_name':'Data Analytics','Course_fee':'40'},
+        {'Course_name':'Team Management','Course_fee':'50'},
+        {'Course_name':'Agile Development','Course_fee':'35'},
+        {'Course_name':'Angularjs Framework','Course_fee':'40'},
+        {'Course_name':'AWS','Course_fee':'60'}];
+        $scope.reverseOrder=true;
+        $scope.sortField='Course_name';
+        
+        $scope.sortBy=function(sortField){
+        $scope.reverseOrder=($scope.sortField===sortField)? !$scope.reverseOrder:false;
+        $scope.sortField=sortField;
+        };
+    })
+</script>
